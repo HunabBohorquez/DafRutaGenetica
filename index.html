@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RutaGenetica — TSP: Genético vs Recocido Simulado</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header><h1>RutaGenetica</h1><p>Agente viajero (TSP): Algoritmo Genético vs Recocido Simulado</p></header>
+  <main>
+    <section class="map-col">
+      <canvas id="map" width="700" height="500"></canvas>
+      <p class="hint">Clic: agregar ciudad · Arrastrar: mover · <span class="lg ga">━ GA</span> <span class="lg sa">┅ SA</span></p>
+      <canvas id="chart" width="700" height="220"></canvas>
+    </section>
+    <aside>
+      <div class="card">
+        <h2>Mapa</h2>
+        <select id="preset">
+          <option value="">— Preset —</option>
+          <option value="circle">Círculo Óptimo (16 nodos, R=200px)</option>
+          <option value="seed42">25 Ciudades (Semilla fija 42)</option>
+          <option value="random30">Aleatorio (30 nodos)</option>
+        </select>
+        <div class="row">
+          <button id="undo">Eliminar último</button>
+          <button id="clear">Limpiar</button>
+        </div>
+      </div>
+      <div class="card">
+        <h2>Parámetros</h2>
+        <label>Modo
+          <select id="mode">
+            <option value="race">Carrera simultánea</option>
+            <option value="ga">Solo Genético</option>
+            <option value="sa">Solo Recocido Simulado</option>
+          </select>
+        </label>
+        <label>GA · Población <input id="pop" type="number" value="80" min="10" max="500"></label>
+        <label>GA · Mutación <input id="mut" type="number" value="0.2" min="0" max="1" step="0.05"></label>
+        <label>SA · Temp. inicial <input id="t0" type="number" value="1000" min="1"></label>
+        <label>SA · Enfriamiento <input id="alpha" type="number" value="0.995" min="0.8" max="0.9999" step="0.001"></label>
+        <label>Velocidad (pasos/frame) <input id="speed" type="number" value="5" min="1" max="100"></label>
+        <div class="row">
+          <button id="start" class="primary">Iniciar</button>
+          <button id="pause">Pausar</button>
+          <button id="step">Paso</button>
+          <button id="reset">Reiniciar</button>
+        </div>
+      </div>
+      <div class="card">
+        <h2>Resultados</h2>
+        <table>
+          <tr><td>Distancia inicial</td><td id="sInit">—</td></tr>
+          <tr><td>Vecino más cercano</td><td id="sNN">—</td></tr>
+          <tr><td class="ga">Mejor GA</td><td id="sGA">—</td></tr>
+          <tr><td class="sa">Mejor SA</td><td id="sSA">—</td></tr>
+          <tr><td>% mejora (vs inicial)</td><td id="sImp">—</td></tr>
+          <tr><td>Generaciones / pasos</td><td id="sIter">—</td></tr>
+        </table>
+        <button id="export">Exportar JSON</button>
+      </div>
+    </aside>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
